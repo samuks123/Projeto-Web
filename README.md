@@ -7,7 +7,7 @@ Samuel Victorio Bernacci - 12703455
 
 https://www.figma.com/proto/GhSJJa7h49rRrtxJsQ8hPq/Casa-dos-sonhos?type=design&node-id=1-22&scaling=min-zoom&page-id=0%3A1
 
-(https://github.com/samuks123/Projeto-Web/assets/103591276/c6d3e364-6a6c-4ea8-95ab-a92f33a3fa47)
+[!image](https://github.com/samuks123/Projeto-Web/assets/103591276/c6d3e364-6a6c-4ea8-95ab-a92f33a3fa47)
 
 Requirements: Os requisitos estão descritos no documento do projeto, https://docs.google.com/document/d/1b1oPy4Uh08-5XWs-xyDDFzLZMHG3W7A2/edit#heading=h.gjdgxs.
 
