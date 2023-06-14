@@ -2,7 +2,9 @@
 Repositório referente a disciplina de Introdução ao Desenvolvimento Web
 
 Grupo 24
+
 Jonathan Sanchez Minaya - 11333691
+
 Samuel Victorio Bernacci - 12703455
 
 https://www.figma.com/proto/GhSJJa7h49rRrtxJsQ8hPq/Casa-dos-sonhos?type=design&node-id=1-22&scaling=min-zoom&page-id=0%3A1
@@ -21,14 +23,23 @@ Test Plan: O plano de testes para o projeto é um teste manual realizado pelos d
 Test Results: ...
 
 Build Procedures: É necessário o Node.js e é recomendado o npm. O create-react-app foi utilizado para importar os primeiros módulos do node, em seguida foram instalados os módulos:
+
 npm install @testing-library/jest-dom
+
 npm install @testing-library/react
+
 npm install @testing-library/user-event
+
 npm install @types/react-router-dom
+
 npm install axios
+
 npm install react
+
 npm install react-dom
+
 npm install react-scripts
+
 npm install web-vitals
 
 Problems: A curva de aprendizagem do React se mostrou um desafio em alguns momentos do desenvolvimento. A dificuldade de utilizar o CSS para atingir o projeto idealizado.
