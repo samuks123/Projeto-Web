@@ -12,6 +12,8 @@ import {BiBed, BiBath, BiArea} from 'react-icons/bi';
 // import link
 import {Link} from 'react-router-dom';
 
+import Cookies from 'universal-cookie';
+
 const PropertyDetails = () => {
     // get the house id
     const {id} = useParams();
@@ -19,6 +21,7 @@ const PropertyDetails = () => {
     const house = housesData.find(house =>{
         return house.id === parseInt(id);
     });
+    const cookies = new Cookies()
 
     return (
         <section>
@@ -68,7 +71,7 @@ const PropertyDetails = () => {
                         {/* form */}
                         <form className='flex flex-col gap-y-4'>
                             <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text'
-                            placeholder='Name*'
+                            placeholder={cookies.get("HomelandUser")?"ok":'Name*'}
                             />
                             <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' 
                             placeholder='Email*'

@@ -1,7 +1,13 @@
-import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useCallback, useState, useContext } from 'react';
+import AuthContext from '../contexts/AuthContext/AuthContext';
+import Cookies from 'universal-cookie';
 
 const LoginPage  = () => {
+
+  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,11 +19,17 @@ const LoginPage  = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = useCallback((event) => {
+  const handleSubmit = (event) => {
+
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-  },[email, password])
+    const cookies = new Cookies()
+    cookies.set("HomeLandUser",{name:"JohnDoe",email:email})
+    cookies.set("HomeLandAuth",true)
+    authContext.setAuth(true)
+    authContext.setUserInfo({name:"JohnDoe",email:email})
+    navigate("/")
+
+  }
 
   return (
     <section>

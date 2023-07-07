@@ -1,8 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from "../contexts/AuthContext/AuthContext";
+import Cookies from 'universal-cookie';
+
 
 import doge from '../assets/img/doge.jpg';
 
+
+
 const UserPage = () => {
+
+    const authContext = useContext(AuthContext)
+    const navigate= useNavigate()
+    const [editing,setEditing] = useState(false)
+    const [inputName,setInputName] = useState(authContext.state.userInfo?authContext.state.userInfo.name:"")
+    const handleUserNameEdit = () => {
+        const cookies = new Cookies()
+        const getEmail = authContext.state.userInfo.email
+        cookies.set("HomeLandUser", { name:inputName, email:getEmail })
+        authContext.setUserInfo( prevState => ({...prevState,name:inputName}) )
+        setEditing(false)
+    }
+
+    useEffect(()=>{
+        const cookies = new Cookies()
+        if (!cookies.get("HomeLandAuth")){
+            navigate("/")
+        }
+    },[])
+
     const { name, email, isAdmin, picture } = {
         name: 'Samuel Victorio Bernacci',
         email: 'samubernacci@gmail.com',
@@ -100,7 +127,26 @@ const UserPage = () => {
         console.log('Agent Image:', agentImage);
         console.log('Agent Name:', agentName);
         console.log('Agent Phone:', agentPhone);
+        const formData = {
+            houseType:houseType,
+            houseName:houseName,
+            houseDescription:houseDescription,
+            houseImage:houseImage,
+            country:country,
+            address:address,
+            bedrooms:bedrooms,
+            bathrooms:bathrooms,
+            surface:surface,
+            year:year,
+            price:price,
+            agentImage:agentImage,
+            agentName:agentName,
+            agentPhone:agentPhone
+        }
+        const cookies = new Cookies()
+        cookies.set("userHouseInfo",formData)
     };
+
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -108,8 +154,38 @@ const UserPage = () => {
                 <div className="flex items-center mb-4">
                     <img src={picture} alt="Profile" className="w-16 h-16 rounded-full mr-4" />
                     <div>
-                        <h2 className="text-2xl font-bold">{name}</h2>
-                        <p className="text-gray-500">{email}</p>
+
+                        {
+                        editing?
+                        <>
+                        <div className='flex gap-3'>
+                            <input className="text-2xl font-bold border pl-3 rounded-md" type="text" style={{border:"1px solid black"}}
+                            value={inputName} 
+                            onChange={(event)=>{
+                                setInputName(event.target.value)
+                            }}/>
+                            <div className='flex gap-2'>
+                                <button className='bg-gray-400 text-white px-2 py-1 rounded-md hover:bg-gray-500' onClick={()=>{setEditing(false)}}>Cancel</button>
+                                <button className='bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600' onClick={handleUserNameEdit}>Save</button>
+                            </div>
+                        </div>
+                        </>
+                        :
+                        <>
+                        <div className='flex gap-3'>
+                            <h2 className="text-2xl font-bold">
+                                {authContext.state.userInfo?authContext.state.userInfo.name:""}
+                            </h2>
+                            <button className='bg-gray-400 text-white px-2 py-1 rounded-md hover:bg-gray-500' 
+                            onClick={()=>{setEditing(true);setInputName(authContext.state.userInfo.name)}}>Edit</button>
+                        </div>
+                        </>
+                        }
+                        
+                        
+                        <p className="text-gray-500">
+                            {authContext.state.userInfo?authContext.state.userInfo.email:""}
+                        </p>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit}>

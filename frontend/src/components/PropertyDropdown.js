@@ -15,7 +15,7 @@ const PropertyDropdown = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-  return <Menu as='div' className='dropdown relative'>
+  return <Menu as='div' className='dropdown relative p-1 w-full'>
     <Menu.Button onClick={()=> setIsOpen(!isOpen)} className='dropdown-btn w-full text-left'>
         <RiHome5Line className='dropdown-icon-primary' />
         <div>
@@ -32,7 +32,7 @@ const PropertyDropdown = () => {
     <Menu.Items className='dropdown-menu'>
         {properties.map((property, index)=> {
             return(
-                <Menu.Item onClick={()=> setProperty(property)} className='cursor-pointer hover:text-violet-700 transition' as='li' key={index}>{property}</Menu.Item>
+                <Menu.Item onClick={()=> setProperty(property)} className='cursor-pointer hover:text-violet-700 transition bg-gray-100 p-1 pl-3' as='ul' key={index}>{property}</Menu.Item>
             )
         })}
     </Menu.Items>

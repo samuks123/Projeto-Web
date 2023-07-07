@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext/AuthContext';
+import Cookies from 'universal-cookie';
+
 
 const SignUpPage = () => {
+  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,11 +25,15 @@ const SignUpPage = () => {
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
-    // Handle sign-up logic here
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
+    const cookies = new Cookies()
+    cookies.set("HomeLandUser",{name:name,email:email})
+    cookies.set("HomeLandAuth",true)
+    authContext.setUserInfo({name:name,email:email})
+    authContext.setAuth(true)
+    navigate("/")
+
   };
 
   return (
