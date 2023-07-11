@@ -73,10 +73,10 @@ const Home = () => {
       <button onClick={()=>{getAllHouseData().then(data=>console.log(data))}}>getAllHouseData</button>
       <button onClick={()=>{getSingleHouseData("64a6ef43f15864e508a77b52").then(data=>console.log(data))}}>getSingleHouseData</button>
       <button onClick={()=>{
-        createHouseData(anotherApartment).then(data=>{console.log(data)})
+        createHouseData({}).then(data=>{console.log(data)})
       }}>createHouseData</button>
       <button onClick={()=>{
-        deleteHouseData("64a785a1373d0f7ffca6e998").then(data=>console.log(data))
+        deleteHouseData("64ac40f7ad0019f8a128f392").then(data=>console.log(data))
       }}>deleteHouseData</button>
       <button onClick={()=>{
         updateHouseData("64a6ef43f15864e508a77b52",{address:"UPDATED, BABY!"}).then(data=>console.log(data))
@@ -90,23 +90,3 @@ const Home = () => {
 
 export default Home;
 
-const anotherApartment = {
-  id: 5,
-  type: "Penthouse",
-  name: "Luxurious Penthouse",
-  description: "An exquisite penthouse with breathtaking views.",
-  image: "https://example.com/images/penthouse.jpg",
-  imageLG: "https://example.com/images/penthouse-lg.jpg",
-  country: "United Kingdom",
-  address: "789 Park Lane",
-  bedrooms: 3,
-  bathrooms: 3,
-  surface: "2000 sqft",
-  year: 2015,
-  price: 5000,
-  agent: {
-    image: "https://example.com/images/agent3.jpg",
-    name: "Robert Johnson",
-    phone: "555-123-4567"
-  }
-};

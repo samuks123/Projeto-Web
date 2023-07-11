@@ -1,24 +1,26 @@
 require("dotenv").config()
-const cors = require("cors")
 
 // express app
 const express = require("express")
 const app = express()
-const houseData_Routes = require("./routes/housedata")
-const image_Routes = require("./routes/image")
+const housedataRoutes = require("./routes/housedata")
+const userRoutes = require("./routes/user")
+
 
 // mongoose
 const mongoose = require("mongoose")
 
 // middleware
-app.use(express.json())
+app.use(express.json({limit:"50mb"}))
 app.use((req,res,next)=>{
     console.log(req.path, req.method)
     next()
 })
+
 // routes
-app.use("/api/housedata",houseData_Routes)
-app.use("/api/image",image_Routes)
+app.use("/api/housedata",housedataRoutes)
+app.use("/api/user",userRoutes)
+
 
 // connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

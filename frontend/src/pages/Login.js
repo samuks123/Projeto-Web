@@ -1,11 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useCallback, useState, useContext } from 'react';
 import AuthContext from '../contexts/AuthContext/AuthContext';
+import AdminContext from '../contexts/AdminContext/AdminContext'
 import Cookies from 'universal-cookie';
+import loginUser from '../utils/ApiFunctions/Users/loginUser';
 
 const LoginPage  = () => {
 
   const authContext = useContext(AuthContext)
+  const adminContext = useContext(AdminContext)
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('');
@@ -19,15 +22,58 @@ const LoginPage  = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
 
     event.preventDefault();
-    const cookies = new Cookies()
-    cookies.set("HomeLandUser",{name:"JohnDoe",email:email})
-    cookies.set("HomeLandAuth",true)
-    authContext.setAuth(true)
-    authContext.setUserInfo({name:"JohnDoe",email:email})
-    navigate("/")
+    const data = await loginUser({email,password})
+    if (data){
+
+      // set authentication cookies
+
+      const cookies = new Cookies()
+      cookies.set("HomeLandUser", {
+
+        token: data.token,
+        id: data.user._id,
+        name: data.user.name,
+        email: data.user.email,
+        phone: data.user.phone,
+        address: data.user.address,
+
+      })
+      
+      cookies.set("HomeLandAuth",true)
+      
+      // update authentication context
+      
+      authContext.setAuth(true)
+      authContext.setUserInfo({
+
+        token: data.token,
+        id: data.user._id,
+        name: data.user.name,
+        email: data.user.email,
+        phone: data.user.phone,
+        address: data.user.address,
+        image: data.user.image
+        
+      })
+
+      // update admin authentication context
+
+      if(data.user.admin) {
+
+        adminContext.setAdminAuth(true)
+
+      }
+
+
+      // redirect
+
+      navigate("/")
+      
+    }
+    
 
   }
 
@@ -42,7 +88,7 @@ const LoginPage  = () => {
                     Email
                     </label>
                     <input
-                    type="email"
+                    type="text"
                     id="email"
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
                     value={email}

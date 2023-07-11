@@ -1,10 +1,13 @@
 import AuthContext from "./AuthContext"
-import { useEffect, useState } from "react"
+import AdminContext from "../AdminContext/AdminContext"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-
 import Cookies from "universal-cookie"
+import getUserData from "../../utils/ApiFunctions/Users/getUserData"
 
 const AuthContextProvider = ({children}) => {
+    
+    const adminContext = useContext(AdminContext)
     const [auth,setAuth] = useState(false)
     const [userInfo,setUserInfo] = useState(null)
     const navigate = useNavigate()
@@ -17,6 +20,7 @@ const AuthContextProvider = ({children}) => {
         cookies.remove("userHouseInfo")
         setUserInfo(null)
         setAuth(false)
+        adminContext.setAdminAuth(false)
         navigate("/Login")
 
     }
@@ -24,11 +28,20 @@ const AuthContextProvider = ({children}) => {
     useEffect(()=>{
 
         if(cookies.get("HomeLandAuth")){
+
             setAuth(true)
-            setUserInfo(cookies.get("HomeLandUser"))
+            console.log("cookie",cookies.get("HomeLandUser").id)
+            ;(async()=>{
+                const data = await getUserData(cookies.get("HomeLandUser").id)
+                if (data) { 
+                    setUserInfo(data)
+                }
+            })();
+
         }
 
     },[])
+
     return(
         <AuthContext.Provider value={{
 

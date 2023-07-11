@@ -12,7 +12,7 @@ const houseDataSchema = new Schema({
     address: String,
     bedrooms: Number,
     bathrooms: Number,
-    surface: String,
+    surface: Number,
     year: Number,
     price: Number,
     agent: {
