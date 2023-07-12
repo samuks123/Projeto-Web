@@ -39,12 +39,12 @@ O back-end foi feito em node.js e utilizando o nodemon.
 
 # Build Procedures: 
 É necessário o Node.js e é recomendado o npm. São necessários dois terminais, um para rodar o front-end e outro para o back-end. \
-no primeiro terminal navege para a parte frontend e execute:
-`npm install`
-`npm start`
-no segundo terminal navege para a pasta backend e execute:
-`npm install`
-`npm install -g nodemon`
+no primeiro terminal navege para a parte frontend e execute: \
+`npm install` \
+`npm start` \
+no segundo terminal navege para a pasta backend e execute: \
+`npm install` \
+`npm install -g nodemon` \
 `nodemon server.js`
 
 # Problems: 
