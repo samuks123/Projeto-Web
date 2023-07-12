@@ -6,6 +6,8 @@ import AuthContext from "../contexts/AuthContext/AuthContext"
 import AdminContext from "../contexts/AdminContext/AdminContext"
 
 import getUserData from "../utils/ApiFunctions/Users/getUserData"
+import getSingleHouseData from "../utils/ApiFunctions/HouseData/getSingleHouseData";
+import UserPageHouseCard from "../components/userpageHouseCard";
 
 const UserPage = () => {
 
@@ -13,6 +15,7 @@ const UserPage = () => {
     const adminContext =  useContext(AdminContext)
 
     const navigate = useNavigate()
+
     const [user,setUser] = useState(null)
 
 
@@ -73,6 +76,7 @@ const UserPage = () => {
             {
 
                 adminContext.state.adminAuth?
+
                 // ADMIN TOOLS
                 <>
 
@@ -89,14 +93,15 @@ const UserPage = () => {
 
                     {
                         user.cart.length!=0?
-                        user.cart.map((item,index)=>(
-                            <p
-                            className="text-2xl font-light text-center mt-6 mb-6" 
-                            key={index}>
-
-                                {item}
-                            </p>
-                        ))
+                        user.cart.map((item_id,index)=>{
+                            return(
+                            <>
+                            
+                            <UserPageHouseCard item_id={item_id} key={index}/>
+                            
+                            </>
+                            )
+                        })
                         :
                         <div className="text-2xl font-light text-center mt-6 mb-6">
                             Cart is empty

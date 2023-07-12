@@ -19,6 +19,7 @@ import deleteHouseData from '../utils/ApiFunctions/HouseData/deleteHouseData';
 import updateHouseData from '../utils/ApiFunctions/HouseData/updateHouseData';
 import AdminContext from '../contexts/AdminContext/AdminContext';
 import { Link } from 'react-router-dom';
+import Search from '../components/Search';
 
 
 const Home2 = () => {
@@ -46,7 +47,10 @@ const Home2 = () => {
   },[])
 
   return (
+  <>
   <div className='min-h-[1800px]'>
+    
+
     {
       authContext.state.auth?
       <>
@@ -55,6 +59,9 @@ const Home2 = () => {
 
         Properties
       </h1>
+      <div>
+        <Search/>
+      </div>
 
       {
         adminContext.state.adminAuth?
@@ -81,6 +88,7 @@ const Home2 = () => {
       </>
     }
   </div>
+  </>
   );
 };
 

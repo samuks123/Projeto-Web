@@ -113,12 +113,14 @@ userSchema.statics.login = async function (email, password){
 userSchema.statics.purchase = async function (user_id,item_id) {
 
     const result = await this.findByIdAndUpdate( user_id, {$push:{ cart: item_id }} )
+
     if (!result) {
-        throw Error ("failed @ findByIdAndUpdate")
+
+        throw Error ("failed @ userSchema findByIdAndUpdate")
     }
 
     return result
 
-} //64adb4c97b35aae0007da9e5
+}
 
 module.exports = mongoose.model("User", userSchema)

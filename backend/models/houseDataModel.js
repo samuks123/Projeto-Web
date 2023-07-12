@@ -19,9 +19,23 @@ const houseDataSchema = new Schema({
         image: String,
         name: String,
         phone: String
-    }
+    },
+    sold: Boolean
     
 }, {timestamps:true})
+
+
+houseDataSchema.statics.purchase = async function ( user_id, item_id ) {
+
+    const result = await this.findByIdAndUpdate ( item_id, { sold: true } )
+
+    if (!result) {
+
+        throw Error ("failed @ houseSchema findByIdAndUpdate")
+    }
+
+    return result
+}
 
 module.exports = mongoose.model("HouseData", houseDataSchema)
 

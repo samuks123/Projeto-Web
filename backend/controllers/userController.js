@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel")
-const UserModel = require("../models/userModel")
+const houseModel = require("../models/houseDataModel")
+
 const jwt = require("jsonwebtoken")
 
 const createToken = (_id) => {
@@ -14,7 +15,7 @@ const loginUser = async (req,res) => {
     const {email, password} = req.body    
     try{
 
-        const user = await UserModel.login(email, password)
+        const user = await userModel.login(email, password)
 
         // create token
         
@@ -34,7 +35,8 @@ const signupUser = async (req,res) => {
     const { email, password, name, phone, address, image } = req.body
     try {
 
-        const user = await UserModel.signup(email,password,name,phone,address,image)
+        console.log(req.body)
+        const user = await userModel.signup(email,password,name,phone,address,image)
 
         // create token
 
@@ -56,7 +58,6 @@ const getUserData = async (req,res) => {
     try{
 
         const user = await userModel.findById(id)
-        console.log(user)
         res.status(200).json({
 
             // don't leak the password
@@ -83,10 +84,11 @@ const getUserData = async (req,res) => {
 const executePurchase = async (req,res) => {
 
     const {user_id,item_id} = req.body
-    
+
     try{
 
-        const result = await userModel.purchase(user_id,item_id)
+        const result1 = await userModel.purchase(user_id,item_id)
+        const result2 = await houseModel.purchase(user_id, item_id)
         res.status(200).json(true)
 
     } catch (error) {
@@ -97,6 +99,8 @@ const executePurchase = async (req,res) => {
     }
 
 }
+
+// update user
 
 module.exports = {
 

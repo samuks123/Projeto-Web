@@ -31,7 +31,7 @@ const PropertyDetails = () => {
 
         (async ()=>{
             const data = await getSingleHouseData(id)
-            if(data){setHouse(data)}
+            if(data){setHouse(data);console.log(data)}
         })()
 
     },[])
@@ -44,7 +44,9 @@ const PropertyDetails = () => {
         console.log(user_id,item_id)
         const result = await addItemToCard(user_id,item_id)
         if (result) {
+
             navigate("/user-page")
+            
         }
 
     }
