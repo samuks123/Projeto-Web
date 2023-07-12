@@ -24,17 +24,17 @@ O back-end foi feito em node.js e utilizando o nodemon.
 
 # Test Plan: 
 ## Credenciais de administrador: Login: admin; Senha: admin
-1: O usúario se cadastra ou realiza o login, seleciona uma casa de sua escolha e a adiciona ao carrinho e finaliza sua compra.
-2: O administrador realiza o login, seleciona uma casa de sua escolha e altera seu preço.
-3: O administrador realiza o login, seleciona uma casa de sua escolha e a deleta.
-4: O administrador realiza o login, seleciona a opção de adicionar uma nova casa, insere todas as informações e confirma.
-5: O usúario se cadastra ou realiza o login, abre a sua página de usuário e deseja mudar seu email.
+1: O usúario se cadastra ou realiza o login, seleciona uma casa de sua escolha e a adiciona ao carrinho e finaliza sua compra. \
+2: O administrador realiza o login, seleciona uma casa de sua escolha e altera seu preço. \
+3: O administrador realiza o login, seleciona uma casa de sua escolha e a deleta. \
+4: O administrador realiza o login, seleciona a opção de adicionar uma nova casa, insere todas as informações e confirma. \
+5: O usúario se cadastra ou realiza o login, abre a sua página de usuário e deseja mudar seu email. 
 
 # Test Results: 
-1: A funcionalidade de carrinho não foi implementada.
-2: Tudo acontece de acordo e o preço é atualizado na base de dados e a tela é atualizada para aplicar a mudança.
-3: Tudo acontece de acordo e a casa é apagada da base de dados e a tela é atualizada para aplicar a mudança.
-4: Tudo acontece de acordo e a cada é inserida na base de dados e a tela é atualizada para aplicar a mudança.
+1: A funcionalidade de carrinho não foi implementada. \
+2: Tudo acontece de acordo e o preço é atualizado na base de dados e a tela é atualizada para aplicar a mudança. \
+3: Tudo acontece de acordo e a casa é apagada da base de dados e a tela é atualizada para aplicar a mudança. \
+4: Tudo acontece de acordo e a cada é inserida na base de dados e a tela é atualizada para aplicar a mudança. \
 5: A funcionalidade de edição de cadastro não foi implementada.
 
 # Build Procedures: 
